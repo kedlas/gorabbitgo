@@ -40,8 +40,7 @@ func (c *Consumer) Consume(queue string, id string, exclusive bool) error {
 				c.read(&msg)
 			}
 		case <- c.quit:
-			_ = chf.ch.Cancel(id, false)
-			break
+			return chf.ch.Cancel(id, false)
 		}
 	}
 }
