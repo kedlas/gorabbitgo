@@ -35,8 +35,8 @@ func (c *Consumer) Consume(queue string, id string, exclusive bool) error {
 
 	for {
 		select {
-		case msg := <- msgs:
-			if msg.Acknowledger != nil {
+		case msg, ok := <- msgs:
+			if ok {
 				c.read(&msg)
 			}
 		case <- c.quit:
